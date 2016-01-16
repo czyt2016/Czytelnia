@@ -1,0 +1,59 @@
+﻿@model Repository.Models.Rodzaj
+
+@{
+    ViewBag.Tytul = "Edytujesz rodzaj nr: " + @Model.Id;
+    ViewBag.Opis = "Edytujesz rodzaj nr: " + @Model.Id;
+    ViewBag.SlowaKluczowe = "rodzaj, lista, czytelnia " + @Model.Id;
+}
+
+<h2>Edytujesz rodzaj nr: @Model.Id</h2>
+@if (ViewBag.Blad == true)
+{
+    <div class="alert alert-danger" role="alert">
+        Wystapił błąd podczas edycji.<br />
+        Spróbuj ponownie.
+    </div>
+}
+else if (ViewBag.Blad == false)
+{
+    <div class="alert alert-success" role="alert">
+        Pomyślnie edytowano.
+        Twój rodzaj wygląda teraz następująco:
+    </div>
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>rodzaj</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.Id)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Nazwa, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Nazwa, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Nazwa, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        
+        @Html.HiddenFor(m => m.ParentId)
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Zapisz" class="btn btn-success" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Wróć", "Index", null, new { @class = "btn btn-info" })
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

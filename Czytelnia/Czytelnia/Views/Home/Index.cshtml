@@ -1,0 +1,43 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="container">
+    <div class="col-md-5">
+        <div class="jumbotron">
+            <h1>CZYTELNIA</h1>
+            <p class="lead">to ogólnodostępna baza książek.</p>
+            <p>Dołącz do nas i dodaj ulubione książki: </p>
+            <p><a href="@Url.Action("Register", "Account")"><input type="button" value="Zarejestruj się" class="btn btn-primary btn-lg btn-block" /></a></p>
+            <p>Jeśli masz już u nas konto: </p>
+            <p><a href="@Url.Action("Login", "Account")"><input type="button" value="Zaloguj się" class="btn btn-primary btn-lg btn-block" /></a></p>
+        </div>  
+    </div>
+    <img src="~/Content/Images/books1.jpg" style="PADDING-TOP: 80px;" />
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        <h2>Zobacz listę książek</h2>
+        <p>Sprawdź jakie książki dodali do tej pory nasi użytkownicy.</p>
+        
+        <a class="btn btn-default" @Html.ActionLink("Lista książek", "Index", "Ksiazka") ></a>
+    </div>
+    <div class="col-md-6">
+        <h2>Dodaj swoje książki</h2>
+        <p>Masz możliwość uzupełnienia ogólnodostępnej listy o swoje ulubione pozycje.</p>
+               
+        <p>
+            @if (User.Identity.IsAuthenticated)
+            {
+                <a class="btn btn-default" @Html.ActionLink("Moje książki", "MojeKsiazki", "Ksiazka") ></a>
+            }
+               
+            @if (!User.Identity.IsAuthenticated)
+            {
+                <a href="@Url.Action("Login", "Account")"><input type="button" value="Zaloguj się" class="btn btn-default" /></a>
+            }
+        </p>
+
+    </div>   
+</div>

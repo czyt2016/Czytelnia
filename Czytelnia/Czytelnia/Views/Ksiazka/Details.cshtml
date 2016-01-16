@@ -1,0 +1,78 @@
+﻿@model Repository.Models.Ksiazka
+@using Microsoft.AspNet.Identity;
+
+@{
+    ViewBag.Tytul = "Szczegóły książki nr" + Model.Id;
+    ViewBag.Opis = "Szczegóły książki nr" + Model.Id;
+    ViewBag.SlowaKluczowe = "książka, " + Model.Id + ", lista, czytelnia";
+}
+
+<h2>Szczegóły książki nr @Model.Id</h2>
+
+<div class="container">
+    <div class="col-md-5">
+        <div>
+            <h4>Ksiazka</h4>
+            <hr />
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.Czytelnik.Email)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Czytelnik.Email)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Autor)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Autor)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Tytul)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Tytul)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Gatunek)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Gatunek)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.RokWydania)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.RokWydania)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.DataDodania)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.DataDodania)
+                </dd>
+
+            </dl>
+        </div>
+        <p>
+            @if (User.Identity.IsAuthenticated && (User.IsInRole("Admin") || User.IsInRole("Pracownik") || Model.CzytelnikId == User.Identity.GetUserId()))
+            {
+                @Html.ActionLink("Edytuj", "Edit", new { id = Model.Id }, new { @class = "btn btn-primary" })
+                @: |
+    }
+            @Html.ActionLink("Wróć", "Index", null, new { @class = "btn btn-info" })
+        </p>
+    </div>
+    <img src="~/Content/Images/bookDetails.jpg" style="PADDING-TOP: 30px;" />
+</div>

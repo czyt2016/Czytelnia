@@ -1,0 +1,33 @@
+﻿@model IEnumerable<Repository.Models.Rodzaj>
+
+@{
+    ViewBag.Tytul = "Lista rodzajow";
+    ViewBag.Opis = "Lista rodzajow";
+    ViewBag.SlowaKluczowe = "Lista, rodzajow, aplikacja";
+}
+
+<h2>Lista rodzajów</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Nazwa)
+        </th>
+        @* <th>
+        @Html.DisplayNameFor(model => model.ParentId)
+    </th> *@
+        </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.ActionLink(item.Nazwa, "PokazKsiazki", new { id = item.Id })
+            </td>
+           @* <td>
+        @Html.DisplayFor(modelItem => item.ParentId)
+    </td> *@
+            </tr>
+        }
+
+    </table>

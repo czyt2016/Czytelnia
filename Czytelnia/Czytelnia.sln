@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.40629.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Czytelnia", "Czytelnia\Czytelnia.csproj", "{2F57BCD3-C775-431F-B00F-709080C6309B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Repository", "Repository\Repository.csproj", "{2B41A43F-9D2A-4917-B675-7B3C6963ECB0}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2F57BCD3-C775-431F-B00F-709080C6309B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2F57BCD3-C775-431F-B00F-709080C6309B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2F57BCD3-C775-431F-B00F-709080C6309B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2F57BCD3-C775-431F-B00F-709080C6309B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2B41A43F-9D2A-4917-B675-7B3C6963ECB0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2B41A43F-9D2A-4917-B675-7B3C6963ECB0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2B41A43F-9D2A-4917-B675-7B3C6963ECB0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2B41A43F-9D2A-4917-B675-7B3C6963ECB0}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,56 @@
+﻿@model Repository.Models.Rodzaj
+
+@{
+    ViewBag.Tytul = "Usuń rodzaj nr" + Model.Id;
+    ViewBag.Opis = "Usuń rodzaj nr" + Model.Id;
+    ViewBag.SlowaKluczowe = "rodzaj, " + Model.Id + ", lista, czytelnia";
+}
+
+<h2>Usuń rodzaj nr @Model.Id</h2>
+
+<!-- Jeśli ViewBag będzie miał wartość true, to znaczy, że trzeba wyświetlić komunikat o błędzie.
+    Dymek z czerwonym tłem utwórz za pomocą Bootstrapa i klasy alert alert-danger. -->
+@if (ViewBag.Blad == true)
+{
+    <div class="alert alert-danger" role="alert">
+        Wystąpił błąd podczas usuwania.<br />
+        Spróbuj ponownie.
+    </div>
+}
+
+<h3>Czy na pewno chcesz usunąć?</h3>
+<div>
+    <h4>rodzaj</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        
+        <dt>
+            @Html.DisplayNameFor(model => model.Nazwa)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nazwa)
+        </dd>
+        
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Usuń" class="btn btn-danger confirmation" /> |
+            @Html.ActionLink("Wróć", "Index", null, new { @class = "btn btn-info" })
+
+        </div>
+    }
+</div>
+
+<!-- dodanie okienka JavaScript pytającego o potwierdzenie usunięcia -->
+@section Scripts{
+    <script type="text/javascript">
+        $('.confirmation').on('click', function () {
+            return confirm('Czy na pewno chcesz usunąć?');
+        });
+    </script>
+}

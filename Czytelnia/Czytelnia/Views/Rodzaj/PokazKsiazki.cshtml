@@ -1,0 +1,54 @@
+﻿@model Repository.Models.Views.KsiazkiZRodzajuViewModels
+
+@{
+    ViewBag.Tytul = "Książki z Rodzaju: " + Model.NazwaRodzaju;
+}
+
+<h2>Książki z Rodzaju: @Model.NazwaRodzaju</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Ksiazki.First().CzytelnikId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Ksiazki.First().Autor)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Ksiazki.First().Tytul)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Ksiazki.First().Gatunek)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Ksiazki.First().RokWydania)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Ksiazki.First().DataDodania)
+        </th>
+    </tr>
+
+@foreach (var item in Model.Ksiazki) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.CzytelnikId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Autor)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Tytul)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Gatunek)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RokWydania)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DataDodania)
+        </td>
+    </tr>
+}
+
+</table>

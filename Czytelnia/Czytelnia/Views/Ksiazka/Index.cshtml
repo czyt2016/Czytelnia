@@ -1,0 +1,116 @@
+﻿@model PagedList.IPagedList<Repository.Models.Ksiazka>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
+@{
+    ViewBag.Tytul = "Lista książek";
+    ViewBag.Opis = "Lista książek";
+    ViewBag.SlowaKluczowe = "książka, lista, czytelnia";
+}
+
+<h2>Lista książek</h2>
+
+@if (User.Identity.IsAuthenticated)
+{
+    <p>
+        <!-- HTML helper ActionLink dodaj klasę CSS dla elementu HTML -->
+        @Html.ActionLink("Dodaj nową książkę", "Create", null, new { @class = "btn btn-primary" })
+    </p>
+}
+
+<p>
+    <img src="~/Content/Images/books2.jpg" style="PADDING-TOP: 30px;" align="middle" valign="center" />
+</p>
+
+@using (Html.BeginForm())
+{
+    <p>
+        Wyszukaj autora, tytuł lub gatunek: @Html.TextBox("SearchString")
+        <input type="submit" value="Szukaj" />
+    </p>
+}
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.ActionLink("Id czytelnika", "Index", new { sortOrder = ViewBag.IdSort })
+        </th>
+        <th>
+            @Html.ActionLink("Autor", "Index", new { sortOrder = ViewBag.AutorSort })
+        </th>
+        <th>
+            @Html.ActionLink("Tytuł", "Index", new { sortOrder = ViewBag.TytulSort })
+        </th>
+        <th>
+            @Html.ActionLink("Gatunek", "Index", new { sortOrder = ViewBag.GatunekSort })
+        </th>
+        <th>
+            @Html.ActionLink("Rok wydania", "Index", new { sortOrder = ViewBag.RokWydaniaSort })
+        </th>
+        <th>
+            @Html.ActionLink("Data dodania", "Index", new { sortOrder = ViewBag.DataDodaniaSort })
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.CzytelnikId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Autor)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Tytul)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Gatunek)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RokWydania)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DataDodania)
+            </td>
+            @* <td>
+                @Html.ActionLink("Szczegóły", "Details", new { id = item.Id }, new { @class = "btn btn-info" })
+                @if (User.Identity.IsAuthenticated && (User.IsInRole("Admin") || User.IsInRole("Pracownik")))
+                {
+                    <br />@Html.ActionLink("Edytuj ", "Edit", new { id = item.Id }, new { @class = "btn glyphicon glyphicon-pencil" })
+                    if (User.IsInRole("Admin"))
+                    {
+                        <br />@Html.ActionLink("Usuń", "Delete", new { id = item.Id }, new { @class = "glyphicon glyphicon-trash" })
+                    }
+                }
+            </td> *@
+
+            <td class="col-lg-3">
+
+                <button type="button" class="btn btn-info col-lg-7" onclick="location.href='@Url.Action("Details", "Ksiazka", new { id = item.Id })';return false;"><span style="margin-right: 5px" class="glyphicon glyphicon-align-justify"></span>Szczegóły</button>
+                                
+                 @if (User.Identity.IsAuthenticated && (User.IsInRole("Admin") || User.IsInRole("Pracownik")))
+                 {
+                    <button type="button" class="btn btn-warning col-lg-4" onclick="location.href='@Url.Action("Edit", "Ksiazka", new { id = item.Id })';return false;"><span style="margin-right: 5px" class="glyphicon glyphicon-pencil"></span>Edytuj</button>
+
+
+                     if (User.IsInRole("Admin"))
+                     {
+                        <button type="button" class="btn btn-danger col-lg-4" onclick="location.href='@Url.Action("Delete", "Ksiazka", new { id = item.Id })' ;return false;"><span style="margin-right: 5px" class="glyphicon glyphicon-trash"></span>Usuń</button>
+                     }
+                 }
+            </td>
+
+        </tr>
+    }
+
+</table>
+
+<div>
+    <br />
+    Strona @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) z @Model.PageCount
+
+
+    @Html.PagedListPager(Model, page => Url.Action("Index", new { page, sortOrder = ViewBag.CurrentSort }))
+</div>
